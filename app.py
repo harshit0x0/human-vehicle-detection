@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 from ultralytics import YOLO
 import cv2
-
+from netlify_lambda import NetlifyLambda
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -50,3 +50,6 @@ def upload_file():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+def lambda_handler(event, context):
+    return NetlifyLambda().handle(event, context, app)
